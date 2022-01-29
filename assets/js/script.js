@@ -13,4 +13,8 @@ function countdown() {
     },1000);
 }
 
+$("#high-scores").on("click", function() {
+    console.log("High Scores");
+});
+
 countdown();
