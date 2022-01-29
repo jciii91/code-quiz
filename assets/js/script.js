@@ -1,4 +1,4 @@
-var contentRowText = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
+var openingText = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
 var timerEl = document.getElementById('timer');
 
 function countdown() {
@@ -22,6 +22,6 @@ $("#start-quiz").on("click", function() {
     console.log("Start quiz");
 });
 
-$("#content-row").text(contentRowText);
+$("#content-row").text(openingText);
 
 countdown();
