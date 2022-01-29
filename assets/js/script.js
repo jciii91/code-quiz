@@ -9,7 +9,6 @@ function countdown() {
             timeLeft--;
         } else {
         clearInterval(countdownInterval);
-            alert("Time's up.")
         }
     },1000);
 }
