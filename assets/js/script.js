@@ -25,15 +25,19 @@ function fisherYatesShuffler(theArray) {
     return shuffledArray;
 }
 
+function loadQuestion(quizArray) {
+    $("#header-row").text(quizArray[0].question);
+    for (let i=0;i<quizArray[0].answers.length;i++) {
+        $("main").append("<div id=\"button-container\" class=\"row d-flex justify-content-center m-2\"><button class=\"btn answer-button\">" + quizArray[0].answers[i] + "</button></div>")
+    }
+}
+
 function Quiz() {
     countdown();
     quizArray = fisherYatesShuffler(quizQuestions);
     $("#content-row").remove();
     $("#start-quiz").remove();
-    $("#header-row").text(quizArray[0].question);
-    for (let i=0;i<quizArray[0].answers.length;i++) {
-        $("main").append("<div id=\"button-container\" class=\"row d-flex justify-content-center m-2\"><button class=\"btn\">" + quizArray[0].answers[i] + "</button></div>")
-    }
+    loadQuestion(quizArray);
 }
 
 $("#high-scores").on("click", function() {
@@ -43,5 +47,9 @@ $("#high-scores").on("click", function() {
 $("#start-quiz").on("click", function() {
     Quiz();
 });
+
+$("main").on("click",".answer-button",function () {
+    console.log(this.textContent);
+})
 
 $("#content-row").text(openingText);
