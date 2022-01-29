@@ -14,14 +14,29 @@ function countdown() {
     },1000);
 }
 
+function fisherYatesShuffler(theArray) {
+    shuffledArray = theArray;
+    for (let i = shuffledArray.length -1; i > 0; i--) {
+        let j = Math.floor(Math.random() * i)
+        let k = shuffledArray[i]
+        shuffledArray[i] = shuffledArray[j]
+        shuffledArray[j] = k
+    }
+    return shuffledArray;
+}
+
+function Quiz() {
+    countdown();
+    quizArray = fisherYatesShuffler(quizQuestions);
+    $("#header-row").text(quizArray[0].question);
+}
+
 $("#high-scores").on("click", function() {
     console.log("High Scores");
 });
 
 $("#start-quiz").on("click", function() {
-    console.log("Start quiz");
+    Quiz();
 });
 
 $("#content-row").text(openingText);
-
-countdown();
