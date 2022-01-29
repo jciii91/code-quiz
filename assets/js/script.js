@@ -1,8 +1,10 @@
 var openingText = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
+var timeLeft = 75;
+var quizArray = fisherYatesShuffler(quizQuestions);
+var counter = quizArray.length-1;
 var timerEl = document.getElementById('timer');
 
 function countdown() {
-    var timeLeft = 75;
 
     var countdownInterval = setInterval(function() {
         if (timeLeft >= 0) {
@@ -25,19 +27,18 @@ function fisherYatesShuffler(theArray) {
     return shuffledArray;
 }
 
-function loadQuestion(quizArray) {
-    $("#header-row").text(quizArray[0].question);
-    for (let i=0;i<quizArray[0].answers.length;i++) {
-        $("main").append("<div id=\"button-container\" class=\"row d-flex justify-content-center m-2\"><button class=\"btn answer-button\">" + quizArray[0].answers[i] + "</button></div>")
+function loadQuestion(quizQuestion) {
+    $("#header-row").text(quizQuestion.question);
+    for (let i=0;i<quizQuestion.answers.length;i++) {
+        $("main").append("<div id=\"button-container\" class=\"row d-flex justify-content-center m-2\"><button class=\"btn answer-button\">" + quizQuestion.answers[i] + "</button></div>")
     }
 }
 
 function Quiz() {
     countdown();
-    quizArray = fisherYatesShuffler(quizQuestions);
     $("#content-row").remove();
     $("#start-quiz").remove();
-    loadQuestion(quizArray);
+    loadQuestion(quizArray[counter]);
 }
 
 $("#high-scores").on("click", function() {
@@ -49,7 +50,13 @@ $("#start-quiz").on("click", function() {
 });
 
 $("main").on("click",".answer-button",function () {
-    console.log(this.textContent);
+    if (this.textContent == quizArray[counter].correctAnswer) {
+        console.log("correct");
+    } 
+    else 
+    {
+        console.log("incorrect");
+    }
 })
 
 $("#content-row").text(openingText);
