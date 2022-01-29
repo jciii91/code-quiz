@@ -64,12 +64,12 @@ var quizQuestions = [
     },
     {
         question: "How can you add a comment in a JavaScript?",
-        answers: ["//This is a comment","<!--This is a comment-->","'This is a comment"],
+        answers: ["//This is a comment","'This is a comment"],
         correctAnswer: "//This is a comment"
     },
     {
         question: "How to insert a comment that has more than one line?",
-        answers: ["/*This comment has more than one line*/","<!--This comment has more than one line-->","//This comment has more than one line//"],
+        answers: ["/*This comment has more than one line*/","//This comment has more than one line//"],
         correctAnswer: "/*This comment has more than one line*/"
     },
     {

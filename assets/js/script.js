@@ -28,7 +28,12 @@ function fisherYatesShuffler(theArray) {
 function Quiz() {
     countdown();
     quizArray = fisherYatesShuffler(quizQuestions);
+    $("#content-row").remove();
+    $("#start-quiz").remove();
     $("#header-row").text(quizArray[0].question);
+    for (let i=0;i<quizArray[0].answers.length;i++) {
+        $("main").append("<div id=\"button-container\" class=\"row d-flex justify-content-center m-2\"><button class=\"btn\">" + quizArray[0].answers[i] + "</button></div>")
+    }
 }
 
 $("#high-scores").on("click", function() {
