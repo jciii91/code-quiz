@@ -10,3 +10,7 @@
 .btn:hover {
   background-color: #f403fc;
 }
+
+.evenRow {
+  background-color: gray;
+}
