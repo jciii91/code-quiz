@@ -1,3 +1,4 @@
+//questions moved here to declutter script.js
 var quizQuestions = [
     {
         question: "The external JavaScript file must contain the \"script\" tag.",
