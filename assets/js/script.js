@@ -30,8 +30,9 @@ function fisherYatesShuffler(theArray) {
 function loadQuestion(quizQuestion) {
     $("main").empty();
     $("main").append("<h2 id=\"header-row\" class=\"row col-lg-12 d-flex justify-content-center\">" + quizQuestion.question + "</h2>");
-    for (let i=0;i<quizQuestion.answers.length;i++) {
-        $("main").append("<div id=\"button-container\" class=\"row d-flex justify-content-center m-2\"><button class=\"btn answer-button\">" + quizQuestion.answers[i] + "</button></div>")
+    answersArray = fisherYatesShuffler(quizQuestion.answers)
+    for (let i=0;i<answersArray.length;i++) {
+        $("main").append("<div id=\"button-container\" class=\"row d-flex justify-content-center m-2\"><button class=\"btn answer-button\">" + answersArray[i] + "</button></div>")
     }
 }
 
@@ -52,12 +53,14 @@ $("main").on("click",".answer-button",function () {
     if (this.textContent == quizArray[counter].correctAnswer) {
         counter--;
         loadQuestion(quizArray[counter]);
+        $("main").append("<div class=\"row col-lg-12 d-flex justify-content-center\"><div class=\"w-50 border-top border-dark d-flex justify-content-center\"><p class=\"p-1\">The correct answer for the previous question is \"" + quizArray[counter+1].correctAnswer + "\"</p></div></div>");
     } 
     else 
     {
         timeLeft -= 10;
         counter--;
         loadQuestion(quizArray[counter]);
+        $("main").append("<div class=\"row col-lg-12 d-flex justify-content-center\"><div class=\"w-50 border-top border-dark d-flex justify-content-center\"><p class=\"p-1\">The correct answer for the previous question is \"" + quizArray[counter+1].correctAnswer + "\"</p></div></div>");
     }
 })
 
