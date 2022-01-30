@@ -99,8 +99,28 @@ $("main").on("click", "#submit-button", function() {
         name: $("#username").val(),
         score: score
     };
-    JSON.stringify(playerObj);
-    console.log(playerObj);
+    var highScores = localStorage.getItem("myScores");
+    if (highScores != null) {
+        parsedScores = JSON.parse(highScores);
+        if (parsedScores.length < 10) {
+            parsedScores.push(playerObj);
+            localStorage.setItem("myScores",JSON.stringify(parsedScores));
+        } else {
+            var replaceIndex = -1;
+            for (var i = 0;i<parsedScores.length;i++) {
+                if (parsedScores[i].score < playerObj.score) {
+                    replaceIndex = i;
+                }
+            }
+            if (replaceIndex > -1) {
+                parsedScores[i] = playerObj;
+                localStorage.setItem("myScores",JSON.stringify(parsedScores));
+            }
+        }
+    } else {
+        highScores = [playerObj];
+        localStorage.setItem("myScores",JSON.stringify(highScores));
+    }
 });
 
 $("#content-row").text(openingText);
