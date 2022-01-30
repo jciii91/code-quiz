@@ -28,7 +28,8 @@ function fisherYatesShuffler(theArray) {
 }
 
 function loadQuestion(quizQuestion) {
-    $("#header-row").text(quizQuestion.question);
+    $("main").empty();
+    $("main").append("<h2 id=\"header-row\" class=\"row col-lg-12 d-flex justify-content-center\">" + quizQuestion.question + "</h2>");
     for (let i=0;i<quizQuestion.answers.length;i++) {
         $("main").append("<div id=\"button-container\" class=\"row d-flex justify-content-center m-2\"><button class=\"btn answer-button\">" + quizQuestion.answers[i] + "</button></div>")
     }
@@ -36,8 +37,6 @@ function loadQuestion(quizQuestion) {
 
 function Quiz() {
     countdown();
-    $("#content-row").remove();
-    $("#start-quiz").remove();
     loadQuestion(quizArray[counter]);
 }
 
@@ -51,11 +50,14 @@ $("#start-quiz").on("click", function() {
 
 $("main").on("click",".answer-button",function () {
     if (this.textContent == quizArray[counter].correctAnswer) {
-        console.log("correct");
+        counter--;
+        loadQuestion(quizArray[counter]);
     } 
     else 
     {
-        console.log("incorrect");
+        timeLeft -= 10;
+        counter--;
+        loadQuestion(quizArray[counter]);
     }
 })
 

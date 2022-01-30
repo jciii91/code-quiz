@@ -1,19 +1,6 @@
 var quizQuestions = [
     {
-        question: "What is the correct JavaScript syntax to change the content of the HTML element <p id=\"demo\">This is a demonstration.</p>?",
-        answers: ["document.getElementById(\"demo\").innerHTML = \"Hello World!\";",
-                "document.getElement(\"p\").innerHTML = \"Hello World!\";",
-                "#demo.innerHTML = \"Hello World!\";",
-                "document.getElementByName(\"p\").innerHTML = \"Hello World!\";"],
-        correctAnswer: "document.getElementById(\"demo\").innerHTML = \"Hello World!\";"
-    },
-    {
-        question: "Where is the correct place to insert a JavaScript?",
-        answers: ["The <body> section","The <head> section","Both the <head> section and the <body> section are correct"],
-        correctAnswer: "Both the <head> section and the <body> section are correct"
-    },
-    {
-        question: "The external JavaScript file must contain the <script> tag.",
+        question: "The external JavaScript file must contain the \"script\" tag.",
         answers: ["False","True"],
         correctAnswer: "False"
     },
