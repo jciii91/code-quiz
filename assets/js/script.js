@@ -75,6 +75,9 @@ function showScores() {
 
     scores = JSON.parse(localStorage.getItem("myScores"));
     if (scores != null) {
+        scores.sort(function(a,b) {
+            return b.score - a.score;
+        });
         for (var i = 0;i<scores.length;i++) {
             $("main").append("<div id=\"scores-container" + i + "\" class=\"row d-flex justify-content-center\"></div>");
             $("#scores-container" + i).append("<div id=\"scores-table" + i + "\" class=\"w-25 d-flex justify-content-center\"></div>");
@@ -110,6 +113,7 @@ $("main").on("click",".answer-button",function () {
         }
         else
         {
+            timeLeft = 0;
             itIsOver();
         }
     } 
