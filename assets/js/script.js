@@ -2,6 +2,7 @@ var openingText = "Try to answer the following code-related questions within the
 var timeLeft = 75;
 var quizArray = fisherYatesShuffler(quizQuestions);
 var counter = quizArray.length-1;
+var score = 0;
 var timerEl = document.getElementById('timer');
 
 function countdown() {
@@ -11,7 +12,8 @@ function countdown() {
             timerEl.textContent = timeLeft;
             timeLeft--;
         } else {
-        clearInterval(countdownInterval);
+            clearInterval(countdownInterval);
+            itIsOver();
         }
     },1000);
 }
@@ -41,6 +43,19 @@ function Quiz() {
     loadQuestion(quizArray[counter]);
 }
 
+function itIsOver() {
+    if (timeLeft < 0) {
+        timeLeft = 0;
+    }
+    score += timeLeft; 
+    $("main").empty();
+    $("main").append("<h2 id=\"header-row\" class=\"row col-lg-12 d-flex justify-content-center\">All done!</h2>");
+    $("main").append("<p class=\"row col-lg-12 d-flex justify-content-center\">Your final score is " + score + "</p>");
+    $("main").append("<div id=\"submission-container\" class=\"row col-lg-12 d-flex justify-content-center\"></div>");
+    $("#submission-container").append("<div id=\"score-submission\" class=\"row d-flex align-items-center w-50\"></div>");
+    $("#score-submission").append("<p class=\"col-lg-5 d-flex justify-content-end\"><span>Please enter your name: </span></p><input type=\"text\" id=\"username\" class=\"form-control col-lg-5\"><button id=\"submit-button\" class=\"btn m-1\">Submit</button></div>");
+}
+
 $("#high-scores").on("click", function() {
     console.log("High Scores");
 });
@@ -50,18 +65,42 @@ $("#start-quiz").on("click", function() {
 });
 
 $("main").on("click",".answer-button",function () {
-    if (this.textContent == quizArray[counter].correctAnswer) {
+    if (this.textContent == quizArray[counter].correctAnswer) 
+    {
         counter--;
-        loadQuestion(quizArray[counter]);
-        $("main").append("<div class=\"row col-lg-12 d-flex justify-content-center\"><div class=\"w-50 border-top border-dark d-flex justify-content-center\"><p class=\"p-1\">The correct answer for the previous question is \"" + quizArray[counter+1].correctAnswer + "\"</p></div></div>");
+        score++;
+        if (counter > 0 && timeLeft > 0) {
+            loadQuestion(quizArray[counter]);
+            $("main").append("<div class=\"row col-lg-12 d-flex justify-content-center\"><div class=\"w-50 border-top border-dark d-flex justify-content-center\"><p class=\"p-1\">The correct answer for the previous question is \"" + quizArray[counter+1].correctAnswer + "\"</p></div></div>");
+        }
+        else
+        {
+            itIsOver();
+        }
     } 
     else 
     {
         timeLeft -= 10;
         counter--;
-        loadQuestion(quizArray[counter]);
-        $("main").append("<div class=\"row col-lg-12 d-flex justify-content-center\"><div class=\"w-50 border-top border-dark d-flex justify-content-center\"><p class=\"p-1\">The correct answer for the previous question is \"" + quizArray[counter+1].correctAnswer + "\"</p></div></div>");
+        if (counter > 0 && timeLeft > 0) 
+        {
+            loadQuestion(quizArray[counter]);
+            $("main").append("<div class=\"row col-lg-12 d-flex justify-content-center\"><div class=\"w-50 border-top border-dark d-flex justify-content-center\"><p class=\"p-1\">The correct answer for the previous question is \"" + quizArray[counter+1].correctAnswer + "\"</p></div></div>");
+        }
+        else
+        {
+            itIsOver();
+        }
     }
 })
+
+$("main").on("click", "#submit-button", function() {
+    var playerObj = {
+        name: $("#username").val(),
+        score: score
+    };
+    JSON.stringify(playerObj);
+    console.log(playerObj);
+});
 
 $("#content-row").text(openingText);
