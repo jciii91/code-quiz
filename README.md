@@ -1,6 +1,6 @@
 # JavaScript Code Quiz
 
-## This webapp is a timed quiz, with questions centered around JavaScript. 
+### This webapp is a timed quiz, with questions centered around JavaScript. 
 
 ### Users are served questions in a random order and have 75 seconds to answer as many as possible. Each question answered correctly adds to their score, while answering incorrectly takes away from their remaining time.
 
